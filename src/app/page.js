@@ -1,15 +1,18 @@
-import personality from "../assets/personality_img.jpg"
-import brain from "../assets/brain.png"
-import thumbs from "../assets/thumbs.png"
-import cert from "../assets/cert.png"
+import { personality,brain,cert,thumbs } from '../assets/img_index.js';
 import Image from 'next/image'
 import ButtonCard from "../components/ButtonCard.js";
 import Navbar from "../components/Navbar.js"
-
+import { redirect } from 'next/navigation'
 
 export default function Home() {
+
+  function gotoquiz(){
+    redirect("/big-five-personality-test")
+  }
+
   return (
     // the main div content
+
     <div className="flex flex-col min-h-screen">
 
       <Navbar/>

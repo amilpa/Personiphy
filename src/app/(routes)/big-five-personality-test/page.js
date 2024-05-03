@@ -4,15 +4,23 @@ import { img1,img2,img3 } from "../../../assets/img_index"
 import Image from "next/image"
 import {questions} from "./questions"
 import {useState} from "react"
-
+// import { useSession } from "next-auth/react"
 
 export default function big5PersonalityTequestions(){
+
+  // const {data:session}=useSession({
+  //   required:true,
+  //   onUnauthenticated(){
+  //       redirect("/api/auth/signin?callbackUrl=/big-five-personality-test")
+  //   }
+  // })
+
   const [page,setPage]=useState(0)
   const [check,setCheck]=useState(undefined)
-  let obj=[]
+  const [result,setResult]=useState([])
 
   function nextPage(){
-    if(page!=4 && obj.length%((page+1)*10)===0){ //the 2nd condition is to make sure everything is selected
+    if(page!=4){ //the 2nd condition is to make sure everything is selected
       setCheck(false)
       setTimeout(()=>{
         setPage(page+1);
@@ -23,8 +31,8 @@ export default function big5PersonalityTequestions(){
 
   function LinearSearch(newObj){
 
-    for(let i=0;i<obj.length;i++){
-      if(obj[i].title===newObj.title){
+    for(let i=0;i<result.length;i++){
+      if(result[i].title===newObj.title){
         return true;
       }
     }
@@ -34,19 +42,20 @@ export default function big5PersonalityTequestions(){
 
   function handleSelect(newObj){
 
-    
+    let obj=result
+
     if(LinearSearch(newObj)){
-      obj=obj.filter(x=>{
+      obj=result.filter(x=>{
         x.title!==newObj.title
       })
 
-      obj=[...obj,newObj]
-      console.log(arr)
+      setResult([...obj,newObj])
+      console.log(result)
       return;
     }
 
-    obj=[...obj,newObj];
-    console.log(obj)
+    setResult([...obj,newObj]);
+    console.log(result)
   }
  
   return (
@@ -96,6 +105,7 @@ export default function big5PersonalityTequestions(){
       
 
     </div>
+  
   )
 }
 

@@ -1,5 +1,5 @@
 "use client"
-import { RadioButtons,Navbar,ButtonCard } from "../../../components/index"
+import { RadioButtons,ButtonCard,PopUp } from "../../../components/index"
 import { img1,img2,img3 } from "../../../assets/img_index"
 import Image from "next/image"
 import {questions} from "./questions"
@@ -7,9 +7,10 @@ import {useEffect, useState,useRef} from "react"
 import { useSession} from "next-auth/react"
 import { useRouter } from "next/navigation"
 import {Kaushan_Script} from "next/font/google";
+import { ValContext } from "./ValContext"
+
 const ks=Kaushan_Script({subsets:["latin"],weight:"400"})
 import Link from "next/link"
-// import { options } from "@/app/api/auth/[...nextauth]/options"
 
 export default function big5PersonalityTequestions(){
 
@@ -40,13 +41,23 @@ export default function big5PersonalityTequestions(){
 
   const [page,setPage]=useState(0)
   const [check,setCheck]=useState(undefined)
+  const [displayErr,setDE]=useState(false)
   // const [result,setResult]=useState([])
   // let obj=[]
 
   const resultref=useRef([]);
 
   function nextPage(){
-    if(page!=4){ //the 2nd condition is to make sure everything is selected
+
+    const l=resultref.current.length
+    const e=(page+1)*10
+
+    if(l%e!==0){
+      setDE(true)
+      return;
+    }
+
+    if(page!=4){ 
       setCheck(false)
       setTimeout(()=>{
         setPage(page+1);
@@ -86,11 +97,11 @@ export default function big5PersonalityTequestions(){
     <div className="flex flex-col min-h-screen">
       <div className="flex justify-between bg-white fixed w-full pb-4">{/* this is the Header/Navbar */}
 
-      <Link href="/">
-        <div className={`mt-9 ml-10 text-3xl ${ks.className}`}>
-          Personiphy
-        </div>
-      </Link>
+        <Link href="/">
+          <div className={`mt-9 ml-10 text-3xl ${ks.className}`}>
+            Personiphy
+          </div>
+        </Link>
 
         <div className="flex mt-10 ml-20">
           <div className="mx-8 text-xl">About Us</div>
@@ -107,15 +118,17 @@ export default function big5PersonalityTequestions(){
             </>
             :
             <>
-              {/* <div className="mx-8 text-center py-3 font-bold text-lg">Login</div> */}
               <Link href="/api/auth/signin"><ButtonCard content="Login" color="#0DD299" w="6.5"/></Link> 
-              {/* <Link href="/api/auth/register"><ButtonCard content="Register" color="#0DD299" w="6.5"/></Link> */}
             </>
           }
       
         </div>
 
       </div>
+
+      <ValContext.Provider value={{displayErr,setDE}}>
+        <PopUp/>
+      </ValContext.Provider>
 
       <div className="w-full min-h-56 bg-[#33A474] mt-28 text-white text-3xl text-center pt-12 font-bold">Personality Test</div>
 

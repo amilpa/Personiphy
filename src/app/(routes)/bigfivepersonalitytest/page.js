@@ -40,8 +40,8 @@ export default function big5PersonalityTequestions(){
 
   const [page,setPage]=useState(0)
   const [check,setCheck]=useState(undefined)
-  // const [result,setResult]=useState([])
-  let obj=[]
+  const [result,setResult]=useState([])
+  // let obj=[]
 
   function nextPage(){
     if(page!=4){ //the 2nd condition is to make sure everything is selected
@@ -55,8 +55,8 @@ export default function big5PersonalityTequestions(){
 
   function LinearSearch(newObj){
 
-    for(let i=0;i<obj.length;i++){
-      if(obj[i].title===newObj.title){
+    for(let i=0;i<result.length;i++){
+      if(result[i].title===newObj.title){
         return true;
       }
     }
@@ -66,30 +66,24 @@ export default function big5PersonalityTequestions(){
 
   function handleSelect(newObj){
 
-    // let obj=result
+    let obj=result
     if(LinearSearch(newObj)){
-      obj=obj.filter(x=>{
-        x.title===newObj.title
-      })
-
-      // setResult([...obj,newObj])
-      obj=[...obj,newObj]
-      // console.log(result)
-      return;
+      obj=obj.filter(x=>x.title!==newObj.title)
     }
 
-    // setResult([...obj,newObj]);
-    obj=[...obj,newObj]
-    // console.log(result)
-    console.log(obj)
+    setResult([...obj,newObj]);
+    console.log(result)
   }
  
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex justify-between bg-white fixed w-full pb-4">{/* this is the Header/Navbar */}
+
+      <Link href="/">
         <div className={`mt-9 ml-10 text-3xl ${ks.className}`}>
           Personiphy
         </div>
+      </Link>
 
         <div className="flex mt-10 ml-20">
           <div className="mx-8 text-xl">About Us</div>

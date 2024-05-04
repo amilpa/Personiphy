@@ -2,6 +2,7 @@ import { personality,brain,cert,thumbs } from '../assets/img_index.js';
 import Image from 'next/image'
 import ButtonCard from "../components/ButtonCard.js";
 import Navbar from "../components/Navbar.js"
+import Link from 'next/link.js';
 
 export default function Home() {
 
@@ -18,7 +19,7 @@ export default function Home() {
       <div className="mt-6 text-center text-2xl">Discover the colours of your personality,<br/>painting the canvas of self-awareness with insight and clarity</div>
 
       <div className="mt-4 flex justify-center">
-        <a href="/bigfivepersonalitytest"><ButtonCard content="Get Started Now" color="#0DD299" w="10"/></a>
+        <Link href="/bigfivepersonalitytest"><ButtonCard content="Get Started Now" color="#0DD299" w="10"/></Link>
       </div>
 
       <div className="h-[800px] w-full mt-4">

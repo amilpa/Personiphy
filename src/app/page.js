@@ -2,13 +2,8 @@ import { personality,brain,cert,thumbs } from '../assets/img_index.js';
 import Image from 'next/image'
 import ButtonCard from "../components/ButtonCard.js";
 import Navbar from "../components/Navbar.js"
-import { redirect } from 'next/navigation'
 
 export default function Home() {
-
-  function gotoquiz(){
-    redirect("/big-five-personality-test")
-  }
 
   return (
     // the main div content
@@ -23,7 +18,7 @@ export default function Home() {
       <div className="mt-6 text-center text-2xl">Discover the colours of your personality,<br/>painting the canvas of self-awareness with insight and clarity</div>
 
       <div className="mt-4 flex justify-center">
-        <ButtonCard content="Get Started Now" color="#0DD299" w="10"/>
+        <a href="/bigfivepersonalitytest"><ButtonCard content="Get Started Now" color="#0DD299" w="10"/></a>
       </div>
 
       <div className="h-[800px] w-full mt-4">

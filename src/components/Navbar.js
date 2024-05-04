@@ -6,7 +6,6 @@ import Link from "next/link";
 const ks=Kaushan_Script({subsets:["latin"],weight:"400"})
 
 export default async function Navbar() {
-
   const session=await getServerSession(options)
 
   return (

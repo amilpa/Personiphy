@@ -1,7 +1,7 @@
-export default function RadioButtons({title,idtag,onSelect,checked}){
+export default function RadioButtons({Qtype,title,idtag,onSelect,checked}){
 
     const getObjVal=(value)=>{
-        onSelect({val:value,title:title});
+        onSelect({Qtype:Qtype,Ans:value});
     }
 
 

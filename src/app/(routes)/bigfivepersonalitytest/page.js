@@ -3,7 +3,7 @@ import { RadioButtons,Navbar,ButtonCard } from "../../../components/index"
 import { img1,img2,img3 } from "../../../assets/img_index"
 import Image from "next/image"
 import {questions} from "./questions"
-import {useEffect, useState} from "react"
+import {useEffect, useState,useRef} from "react"
 import { useSession} from "next-auth/react"
 import { useRouter } from "next/navigation"
 import {Kaushan_Script} from "next/font/google";
@@ -40,8 +40,10 @@ export default function big5PersonalityTequestions(){
 
   const [page,setPage]=useState(0)
   const [check,setCheck]=useState(undefined)
-  const [result,setResult]=useState([])
+  // const [result,setResult]=useState([])
   // let obj=[]
+
+  const resultref=useRef([]);
 
   function nextPage(){
     if(page!=4){ //the 2nd condition is to make sure everything is selected
@@ -55,9 +57,14 @@ export default function big5PersonalityTequestions(){
 
   function LinearSearch(newObj){
 
-    for(let i=0;i<result.length;i++){
-      if(result[i].title===newObj.title){
-        return true;
+    let arr=resultref.current
+
+    for(let i=0;i<arr.length;i++){
+      let x=arr[i]
+      for(let j=0;j<x.length;j++){
+        if(x[j].Qtype===newObj.Qtype){
+          return true
+        }
       }
     }
 
@@ -66,13 +73,13 @@ export default function big5PersonalityTequestions(){
 
   function handleSelect(newObj){
 
-    let obj=result
+    let obj=[...resultref.current]
     if(LinearSearch(newObj)){
-      obj=obj.filter(x=>x.title!==newObj.title)
+      obj=obj.filter(x=>x.Qtype!==newObj.Qtype)
     }
 
-    setResult([...obj,newObj]);
-    console.log(result)
+    resultref.current=[...obj,newObj]
+    console.log(resultref.current)
   }
  
   return (
@@ -110,7 +117,7 @@ export default function big5PersonalityTequestions(){
 
       </div>
 
-      <div className="w-full min-h-56 bg-[#33A474] mt-28 text-white text-3xl text-center pt-12 font-bold">Personality Test {session?.user?.email}</div>
+      <div className="w-full min-h-56 bg-[#33A474] mt-28 text-white text-3xl text-center pt-12 font-bold">Personality Test</div>
 
       <div className="flex justify-evenly">
         <div className="w-1/4 min-h-52 bg-[#D8E9EF] mt-6">
@@ -136,16 +143,16 @@ export default function big5PersonalityTequestions(){
       {/* the below component be the quiz component */}
 
       <div className="mt-8 min-w-full min-h-[60%] ">
-        <RadioButtons title={questions[page].one} idtag="a" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].two} idtag="b" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].three} idtag="c" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].four} idtag="d" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].five} idtag="e" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].six} idtag="f" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].seven} idtag="g" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].eight} idtag="h" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].nine} idtag="i" onSelect={handleSelect} checked={check}/>
-        <RadioButtons title={questions[page].ten} idtag="j" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][0].Qtype} title={questions[page][0].question} idtag="a" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][1].Qtype} title={questions[page][1].question} idtag="b" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][2].Qtype} title={questions[page][2].question} idtag="c" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][3].Qtype} title={questions[page][3].question} idtag="d" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][4].Qtype} title={questions[page][4].question} idtag="e" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][5].Qtype} title={questions[page][5].question} idtag="f" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][6].Qtype} title={questions[page][6].question} idtag="g" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][7].Qtype} title={questions[page][7].question} idtag="h" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][8].Qtype} title={questions[page][8].question} idtag="i" onSelect={handleSelect} checked={check}/>
+        <RadioButtons Qtype={questions[page][9].Qtype} title={questions[page][9].question} idtag="j" onSelect={handleSelect} checked={check}/>
       </div>
 
       <div className="flex justify-center mt-4 mb-6">

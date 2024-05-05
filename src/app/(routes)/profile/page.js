@@ -69,3 +69,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";

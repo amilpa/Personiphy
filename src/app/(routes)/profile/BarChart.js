@@ -10,7 +10,7 @@ export default function drawBarGraph(){
     const data={
         labels:["Openness","Conscientiousness","Extraversion","Agreeableness","Neuroticism"],
         datasets:[{
-            data:[56,33,46,44,37],
+            data:[23,47,65,81,94],
             label:"Personality",
             backgroundColor:[
                 "#1E5A8D",

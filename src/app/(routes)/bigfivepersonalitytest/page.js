@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation"
 import { ValContext } from "./ValContext"
 import axios from "axios"
 
+let res;
+
 export default function big5PersonalityTequestions(){
 
   const router=useRouter()
@@ -76,10 +78,20 @@ export default function big5PersonalityTequestions(){
       result.current=[...result.current,...tempStorage.current]
       tempStorage.current=[]
 
-      console.log(result.current)
+      let finalObj={}
 
-      const response=await axios.post("/api/createOutput",result.current)
-      console.log(response)
+      for(let i=0;i<result.current.length;i++){
+        finalObj={...finalObj,[result.current[i].Qtype]:result.current[i].Ans}
+      }
+
+      finalObj=[finalObj]
+
+      //convert the finalObj to a json object and send it to the server
+      finalObj=JSON.stringify(finalObj)
+
+      const response=await axios.post("/api/createOutput",finalObj)
+      res=response.data.result[0]
+      router.push("/profile")
       return;
     }
 
@@ -175,5 +187,9 @@ export default function big5PersonalityTequestions(){
     </div>
   
   )
+}
+
+export const RES=()=>{
+  return res;
 }
 

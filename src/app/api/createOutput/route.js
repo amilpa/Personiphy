@@ -4,7 +4,10 @@ import { utils, write } from "xlsx";
 
 export async function POST(request) {
   try {
+    console.log("Hello World");
     const result = await request.json();
+
+    console.log("Hi")
 
     let worksheet = utils.json_to_sheet(result);
     let workbook = utils.book_new();
@@ -58,6 +61,7 @@ export async function POST(request) {
     // console.log(response)
     return NextResponse.json(res.data);
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ msg: error.response.data });
   }
 }

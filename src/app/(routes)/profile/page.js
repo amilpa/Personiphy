@@ -60,7 +60,7 @@ export default function Profile(){
             </div>
 
             <div className="flex text-white mt-10 w-[40%]">
-                <PieChart/>
+                <PieChart interMData={data}/>
             </div>
 
 

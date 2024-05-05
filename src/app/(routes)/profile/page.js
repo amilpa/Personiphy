@@ -49,7 +49,7 @@ export default function Profile(){
                 </div>
             </div>
 
-            <div className="flex text-white mt-10 w-2/5 h-2/5">
+            <div className="flex text-white mt-10 w-[40%]">
                 <PieChart/>
             </div>
 

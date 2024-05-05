@@ -42,20 +42,41 @@ export default function big5PersonalityTequestions(){
   // const [result,setResult]=useState([])
   // let obj=[]
 
-  const resultref=useRef([]);
+  const result=useRef([]);
+  const tempStorage=useRef([])
+
+  function customSort(a, b) {
+    // Extract the numeric part of the Qtype string
+    const numA = parseInt(a.Qtype.substring(3));
+    const numB = parseInt(b.Qtype.substring(3));
+
+    // Compare the numeric parts
+    if (numA < numB) {
+        return -1;
+    }
+    if (numA > numB) {
+        return 1;
+    }
+    return 0;
+}
+
 
   async function nextPage(){
 
-    const l=resultref.current.length
-    const e=(page+1)*10
+    const l=tempStorage.current.length
 
-    if(l%e!==0){
+    if(l%10!==0){
       setDE(true)
       return;
     }
 
     if(page==4){
-      await axios.post("/api/createOutput",resultref.current)
+      tempStorage.current.sort(customSort)
+
+      result.current=[...result.current,...tempStorage.current]
+      tempStorage.current=[]
+
+      await axios.post("/api/createOutput",result.current)
       return;
     }
 
@@ -65,12 +86,18 @@ export default function big5PersonalityTequestions(){
         setPage(page+1);
         setCheck(undefined)
       },100)
+
+      //sort the resultref.current array based on the Qtype
+      tempStorage.current.sort(customSort)
+
+      result.current=[...result.current,...tempStorage.current]
+      tempStorage.current=[]
     }
   }
 
   function LinearSearch(newObj){
 
-    let arr=resultref.current
+    let arr=tempStorage.current
 
     for(let i=0;i<arr.length;i++){
       if(arr[i].Qtype===newObj.Qtype){
@@ -83,13 +110,12 @@ export default function big5PersonalityTequestions(){
 
   function handleSelect(newObj){
 
-    let obj=[...resultref.current]
+    let obj=[...tempStorage.current]
     if(LinearSearch(newObj)){
       obj=obj.filter(x=>x.Qtype!==newObj.Qtype) 
     }
 
-    resultref.current=[...obj,newObj]
-    console.log(resultref.current)
+    tempStorage.current=[...obj,newObj]
   }
  
   return (

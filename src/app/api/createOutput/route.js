@@ -58,8 +58,6 @@ export async function POST(request) {
     // console.log(response)
     return NextResponse.json(res.data);
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ msg: "Error occured" });
     return NextResponse.json({ msg: error });
   }
 }

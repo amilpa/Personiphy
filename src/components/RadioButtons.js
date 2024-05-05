@@ -5,6 +5,7 @@ export default function RadioButtons({Qtype,title,idtag,onSelect,checked}){
     }
 
 
+
     return(
         <>
             <div className="text-center font-semibold text-2xl mt-6">{title}</div>

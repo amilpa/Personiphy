@@ -65,7 +65,7 @@ export default function big5PersonalityTequestions(){
 
     const l=tempStorage.current.length
 
-    if(l%10!==0){
+    if(l===0 || l%10!==0){
       setDE(true)
       return;
     }
@@ -76,7 +76,10 @@ export default function big5PersonalityTequestions(){
       result.current=[...result.current,...tempStorage.current]
       tempStorage.current=[]
 
-      await axios.post("/api/createOutput",result.current)
+      console.log(result.current)
+
+      const response=await axios.post("/api/createOutput",result.current)
+      console.log(response)
       return;
     }
 

@@ -45,7 +45,7 @@ export default function Page() {
     if (session && session.user.role !== "company") {
       router.push("/");
     }
-  }, [session, status]);
+  }, [session, status, router]);
 
   async function Submit() {
     const formData = new FormData();

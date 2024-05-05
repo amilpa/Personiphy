@@ -17,7 +17,7 @@ import { questions } from "./questions";
 
 let res;
 
-export default function big5PersonalityTequestions() {
+export default function Big5PersonalityTequestions() {
   const router = useRouter();
   const { data: session, status } = useSession({});
   const code = CODE();
@@ -57,7 +57,7 @@ export default function big5PersonalityTequestions() {
     if (code === undefined) {
       router.push("/entercode");
     }
-  }, [status, router, code]);
+  }, [status, router, code, session]);
 
   const [page, setPage] = useState(0);
   const [check, setCheck] = useState(undefined);

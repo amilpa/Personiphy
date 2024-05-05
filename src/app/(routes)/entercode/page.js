@@ -40,7 +40,7 @@ export default function Page() {
     if (!session) {
       router.push("/");
     }
-  }, [session, status]);
+  }, [session, status, router]);
 
   function submit() {
     codeG = code;

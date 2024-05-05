@@ -1,16 +1,12 @@
 "use client"
-import { RadioButtons,ButtonCard,PopUp } from "../../../components/index"
+import { RadioButtons,ButtonCard,PopUp, Navbar } from "../../../components/index"
 import { img1,img2,img3 } from "../../../assets/img_index"
 import Image from "next/image"
 import {questions} from "./questions"
 import {useEffect, useState,useRef} from "react"
 import { useSession} from "next-auth/react"
 import { useRouter } from "next/navigation"
-import {Kaushan_Script} from "next/font/google";
 import { ValContext } from "./ValContext"
-
-const ks=Kaushan_Script({subsets:["latin"],weight:"400"})
-import Link from "next/link"
 import axios from "axios"
 
 export default function big5PersonalityTequestions(){
@@ -98,36 +94,7 @@ export default function big5PersonalityTequestions(){
  
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex justify-between bg-white fixed w-full pb-4">{/* this is the Header/Navbar */}
-
-        <Link href="/">
-          <div className={`mt-9 ml-10 text-3xl ${ks.className}`}>
-            Personiphy
-          </div>
-        </Link>
-
-        <div className="flex mt-10 ml-20">
-          <div className="mx-8 text-xl">About Us</div>
-          <div className="mx-8 text-xl" >Teams</div>
-          <div className="mx-8 text-xl">Contact</div>
-        </div>
-
-        <div className="flex mt-8">
-          {
-          session ?
-            <>
-              <div className="mx-8 text-center py-3 font-bold text-lg">{session.user.name}</div>
-              <Link href="/api/auth/signout"><ButtonCard content="Logout" color="#0DD299" w="6.5"/></Link>
-            </>
-            :
-            <>
-              <Link href="/api/auth/signin"><ButtonCard content="Login" color="#0DD299" w="6.5"/></Link> 
-            </>
-          }
-      
-        </div>
-
-      </div>
+      <Navbar/>
 
       <ValContext.Provider value={{displayErr,setDE}}>
         <PopUp/>

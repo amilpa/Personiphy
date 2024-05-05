@@ -2,6 +2,7 @@ import {K2D} from "next/font/google";
 import "./globals.css";
 
 const k2d = K2D({ subsets: ["latin"],weight:["300","400","500","600","700"]});
+import AuthProvider from "./(routes)/bigfivepersonalitytest/AuthProvider"
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {  
   return (
     <html lang="en">
-      <body className={`${k2d.className}`}>{children}</body>
+      <AuthProvider>
+        <body className={`${k2d.className}`}>{children}</body>
+      </AuthProvider>
     </html>
   );
 }

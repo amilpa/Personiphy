@@ -1,17 +1,19 @@
+"use client"
 import {Kaushan_Script} from "next/font/google";
 import ButtonCard from "./ButtonCard";
-import { getServerSession } from "next-auth";
-import { options } from "../app/api/auth/[...nextauth]/options";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 const ks=Kaushan_Script({subsets:["latin"],weight:"400"})
 
-export default async function Navbar() {
-  const session=await getServerSession(options)
+export default function Navbar() {
+  const {data:session}=useSession({})
 
   return (
     <div className="flex justify-between bg-white fixed w-full pb-4">{/* this is the Header/Navbar */}
         <div className={`mt-9 ml-10 text-3xl ${ks.className}`}>
-          Personiphy
+          <Link href="/">
+            Personiphy
+          </Link>
         </div>
 
         <div className="flex mt-10 ml-20">

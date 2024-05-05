@@ -31,7 +31,6 @@ export async function POST(request) {
         },
       }
     );
-    console.log(res.data);
 
     // let obj_h=[]
     // let obj_d=[]

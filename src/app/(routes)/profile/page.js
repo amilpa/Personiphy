@@ -18,12 +18,11 @@ export default function Profile() {
     if (status === "unauthenticated") {
       router.push("/api/auth/signin");
     }
-  }, [session, status, router]);
-
-  if (data === undefined) {
-    router.push("/bigfivepersonalitytest");
-    return;
-  }
+    if (data === undefined) {
+      router.push("/bigfivepersonalitytest");
+      return;
+    }
+  }, [session, status, router, data]);
 
   return (
     <div className="flex flex-col min-h-screen min-w-full bg-[#191A1C]">

@@ -22,14 +22,15 @@ export default function drawPieChart(){
         }]
     }
 
-    const options={
-    
+const options={
+    plugins:{
         legend:{
             labels:{
                 color:"white"
             }
         }
     }
+}   
 
     return(
         <Pie data={data} options={options}/>

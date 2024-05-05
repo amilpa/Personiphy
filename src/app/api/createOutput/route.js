@@ -1,15 +1,15 @@
+import { ConnectDB, DisconnectDB } from "@/db/dbConnect";
+import Results from "@/models/results";
+import Test from "@/models/test";
 import axios from "axios";
 import { NextResponse } from "next/server";
 import { utils, write } from "xlsx";
 
 export async function POST(request) {
   try {
-    console.log("Hello World");
     const result = await request.json();
 
-    console.log("Hi")
-
-    let worksheet = utils.json_to_sheet(result);
+    let worksheet = utils.json_to_sheet(result.result);
     let workbook = utils.book_new();
     utils.book_append_sheet(workbook, worksheet, "Sheet1");
     let binaryString = write(workbook, { type: "binary" });
@@ -59,9 +59,24 @@ export async function POST(request) {
     // })
 
     // console.log(response)
+
+    await ConnectDB();
+
+    const newResult = await Results.create({
+      ...res.data.result[0],
+      name: result.name,
+    });
+    const test = await Test.findOne({ code: result.code });
+    if (test) {
+      test.results.push(newResult._id);
+      await test.save();
+    }
+
+    await DisconnectDB();
+
     return NextResponse.json(res.data);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return NextResponse.json({ msg: error.response.data });
   }
 }

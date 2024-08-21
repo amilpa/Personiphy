@@ -14,3 +14,7 @@ the way for a more cohesive and productive work environment.
 ## Project report
 
 [View pdf](./personiphyteam.pdf)
+
+## Screenshots
+
+![Personify Screenshot](./personiphy-demo.jpg)

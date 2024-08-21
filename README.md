@@ -17,4 +17,12 @@ the way for a more cohesive and productive work environment.
 
 ## Screenshots
 
-![Personify Screenshot](./personiphy-demo.jpg)
+![Personify Screenshot](./screenshots/personiphy-demo.jpg)
+
+![Personify Screenshot](./screenshots/1.jpg)
+
+![Personify Screenshot](./screenshots/2.jpg)
+
+![Personify Screenshot](./screenshots/3.jpg)
+
+![Personify Screenshot](./screenshots/4.jpg)
